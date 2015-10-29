@@ -22,7 +22,7 @@ module Pour
 
     # This Gem's homepage URL.
     def self.homepage
-      "http://#{self.name}.mtwilliams.github.io"
+      "http://mtwilliams.github.io/#{self.name}"
     end
 
     # This Gem's URL.
