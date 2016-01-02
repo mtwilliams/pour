@@ -32,12 +32,12 @@ module Pour
 
     # A short summary of this Gem.
     def self.summary
-      "Compose concrete classes."
+      "Easily compose type-safe, concrete classes."
     end
 
     # A full description of this Gem.
     def self.description
-      "Pour is a clean and extensible Ruby library that allows you to compose concrete classes and keep yourself DRY."
+      "Pour lets you to easily compose type-safe, concrete classes."
     end
 
     module VERSION #:nodoc:
