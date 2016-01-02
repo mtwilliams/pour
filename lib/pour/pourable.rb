@@ -30,18 +30,18 @@ module Pour
         end
       end
 
-      private
-        def __properties__
-          if self.class.superclass.included_modules.include? Pour::Pourable
-            properties = self.class.superclass.class_variable_get(:@@__properties__)
-            self.class_variable_set(:@@__properties__, properties)
-          end
-          self.class_variable_get(:@@__properties__) || []
-        end
-
-        def __properties__=(properties)
+      def __properties__
+        if self.class.superclass.included_modules.include? Pour::Pourable
+          properties = self.class.superclass.class_variable_get(:@@__properties__)
           self.class_variable_set(:@@__properties__, properties)
         end
+
+        self.class_variable_get(:@@__properties__)
+      end
+
+      def __properties__=(properties)
+        self.class_variable_set(:@@__properties__, properties)
+      end
     end
 
     module InstanceMethods
