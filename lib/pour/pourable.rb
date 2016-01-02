@@ -2,7 +2,7 @@ module Pour
   module Pourable
     module ClassMethods
       def property(name, typespec)
-        if self.__properties__.map(:name).include?(name)
+        if self.__properties__.map(&:name).include?(name)
           raise "Already have a property called '#{name}'!"
         end
 
