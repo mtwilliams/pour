@@ -50,6 +50,8 @@ module Pour
     def self.included(pourable)
       pourable.send :extend, ClassMethods
       pourable.send :include, InstanceMethods
+
+      pourable.class_variable_set :@@__properties__, []
     end
   end
 end

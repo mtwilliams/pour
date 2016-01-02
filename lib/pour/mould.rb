@@ -5,7 +5,9 @@ module Pour
         unless pourable.class.included_modules.include?(Pour::Pourable)
           raise Pour::Unpourable.new(pourable)
         end
-        poured = self.class_variable_get(:@@__poured__) || []
+
+        poured = self.class_variable_get(:@@__poured__)
+
         unless poured.include? pourable
           self.class_variable_set(:@@__poured__, poured + pourable)
           # This capture all the properties as well as any user-defined methods.
