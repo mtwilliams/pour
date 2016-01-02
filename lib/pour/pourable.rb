@@ -3,7 +3,7 @@ module Pour
     module ClassMethods
       def property(name, typespec)
         if self.__properties__.map(:name).include?(name)
-          raise "Already have a property called '#{name}'"
+          raise "Already have a property called '#{name}'!"
         end
 
         property = Pour::Property.new(name: name, typespec: typespec)
@@ -18,15 +18,15 @@ module Pour
             self.insance_variable_get(decorated)
           end
 
-          # TODO(mtwilliams): Provide writers, too.
-           # define_method writer do |new_value|
-           #   if property.typespec.valid?(new_value)
-           #     self.insance_variable_set(decorated, new_value)
-           #   else
-           #     # TODO(mtwilliams): recursively map to determine where and why the
-           #     # |new_value| doesn't match the type-spec.
-           #   end
-           # end
+          define_method writer do |new_value|
+            if property.typespec.valid?(new_value)
+              self.insance_variable_set(decorated, new_value)
+            else
+              # TODO(mtwilliams): recursively map to determine where and why the
+              # |new_value| doesn't match the typespec.
+              raise ":("
+            end
+          end
         end
       end
 
