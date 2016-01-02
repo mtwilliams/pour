@@ -7,7 +7,7 @@ module Pour
         end
 
         property = Pour::Property.new(name: name, typespec: typespec)
-        self.__properties__ = self.__properties__ + property
+        self.__properties__ = self.__properties__ + [property]
 
         decorated = "@#{name}".to_sym
         reader = name.to_sym
