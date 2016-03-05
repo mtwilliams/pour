@@ -13,19 +13,17 @@ module Pour
         reader = name.to_sym
         writer = "#{name}=".to_sym
 
-        self.class_eval do
-          define_method reader do
-            self.insance_variable_get(decorated)
-          end
+        self.send :define_method, reader do
+          self.instance_variable_get(decorated)
+        end
 
-          define_method writer do |new_value|
-            if property.typespec.valid?(new_value)
-              self.insance_variable_set(decorated, new_value)
-            else
-              # TODO(mtwilliams): recursively map to determine where and why the
-              # |new_value| doesn't match the typespec.
-              raise ":("
-            end
+        self.send :define_method, writer do |new_value|
+          if property.typespec.valid?(new_value)
+            self.instance_variable_set(decorated, new_value)
+          else
+            # TODO(mtwilliams): Recursively map to determine where and why the
+            # |new_value| doesn't match the typespec.
+            raise "#{new_value.inspect} doesn't match typespec: #{typespec.inspect}"
           end
         end
       end
